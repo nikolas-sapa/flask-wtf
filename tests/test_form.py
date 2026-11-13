@@ -128,3 +128,24 @@ def test_set_default_message_language(app, client):
 
     client.post("/default", data={"name": "  "})
     client.post("/es", data={"name": "  "})
+
+
+def test_i18n_falls_back_without_babel(app, client, monkeypatch):
+    monkeypatch.setattr("flask_wtf.form.translations", None)
+
+    class NameForm(FlaskForm):
+        class Meta:
+            csrf = False
+            locales = ["es"]
+
+        name = StringField(validators=[DataRequired()])
+
+    @app.route("/", methods=["POST"])
+    def index():
+        form = NameForm()
+        assert not form.validate_on_submit()
+        assert "Este campo es obligatorio." in form.name.errors
+
+    client.post("/", data={"name": "  "})
+    app.config["WTF_I18N_ENABLED"] = True
+    client.post("/", data={"name": "  "})

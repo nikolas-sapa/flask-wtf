@@ -64,7 +64,9 @@ class FlaskForm(Form):
             return formdata
 
         def get_translations(self, form):
-            if not current_app.config.get("WTF_I18N_ENABLED", True):
+            if translations is None or not current_app.config.get(
+                "WTF_I18N_ENABLED", True
+            ):
                 return super().get_translations(form)
 
             return translations

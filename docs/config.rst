@@ -31,7 +31,9 @@ Configuration
 ``WTF_I18N_ENABLED``       Set to ``False`` to disable Flask-Babel I18N support.
                            Also set to ``False`` if you want to use WTForms's
                            built-in messages directly, see more info `here`_.
-                           Default is ``True``.
+                           Default is ``True``. Has no effect if Flask-Babel
+                           is not installed; WTForms's built-in translations
+                           are used in that case.
 ========================== =====================================================
 
 .. _here: https://wtforms.readthedocs.io/en/stable/i18n.html#using-the-built-in-translations-provider

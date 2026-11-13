@@ -8,6 +8,9 @@ Unreleased
 
 - Require Flask >= 3.0, Werkzeug >= 3.0, WTForms >= 3.0 and
   ItsDangerous >= 2.1.2.
+- Fall back to WTForms's built-in translations when Flask-Babel is not
+  installed, so ``Meta.locales`` works without requiring Flask-Babel.
+  :issue:`582`
 
 Version 1.3.0
 -------------
